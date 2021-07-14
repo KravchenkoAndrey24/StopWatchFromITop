@@ -42,25 +42,28 @@ function App() {
       setState({hours: 0, minutes: 0, seconds: 0})
       setStartOrStop(!startOrStop)
     }
-    
   }
 
   const onClickResetButton = () => {
     setState({hours: 0, minutes: 0, seconds: 0})
     setStartOrStop(true)
   }
-  const onClickWaitButton = () => {
-    setWait(true)
-    setStartOrStop(false)
-  }
 
+  const onClickWaitButton = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    setTimeout(()=>{
+      if(e.detail === 2){
+        setWait(true)
+        setStartOrStop(false)  
+      }
+    }, 300)
+  }
 
   return (
     <div style={{'textAlign': 'center', 'margin': '20px'}}>
       <Button variant="contained" color="primary" onClick={()=>onClickStartOrStopButton()} style={{'margin': "10px"}}>
         {startOrStop ? 'Stop' : 'Start'}
       </Button>
-      <Button variant="contained" color="primary" onClick={()=>onClickWaitButton()} style={{'margin': "10px"}}> 
+      <Button variant="contained" color="primary" onClick={onClickWaitButton} style={{'margin': "10px"}}> 
         Wait
       </Button>
       <Button variant="contained" color="primary" onClick={()=>onClickResetButton()} style={{'margin': "10px"}}>
